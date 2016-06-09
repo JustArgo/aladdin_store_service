@@ -4,7 +4,7 @@
 
   <groupId>com.mi360.aladdin</groupId>
   <artifactId>store</artifactId>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.2.0-SNAPSHOT</version> 
   <packaging>jar</packaging>
 
   <name>aladdin_product_service</name>
