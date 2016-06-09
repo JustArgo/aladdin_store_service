@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mi360.aladdin.store.mapper.StoreMapper" >
+  <resultMap id="BaseResultMap" type="com.mi360.aladdin.store.domain.Store" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="mqID" property="mqID" jdbcType="VARCHAR" />
+    <result column="abstraction" property="abstraction" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="logoPath" property="logoPath" jdbcType="VARCHAR" />
+    <result column="insertTime" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, mqID, abstraction, title, logoPath, insertTime, updateTime, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_store
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_store
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mi360.aladdin.store.domain.Store" useGeneratedKeys="true" keyProperty="ID">
+    insert into t_store (ID, mqID, abstraction, 
+      title, logoPath, insertTime, 
+      updateTime, status)
+    values (#{ID,jdbcType=INTEGER}, #{mqID,jdbcType=VARCHAR}, #{abstraction,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{logoPath,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mi360.aladdin.store.domain.Store" useGeneratedKeys="true" keyProperty="ID">
+    insert into t_store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="mqID != null" >
+        mqID,
+      </if>
+      <if test="abstraction != null" >
+        abstraction,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="logoPath != null" >
+        logoPath,
+      </if>
+      <if test="insertTime != null" >
+        insertTime,
+      </if>
+      <if test="updateTime != null" >
+        updateTime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="mqID != null" >
+        #{mqID,jdbcType=VARCHAR},
+      </if>
+      <if test="abstraction != null" >
+        #{abstraction,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="logoPath != null" >
+        #{logoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mi360.aladdin.store.domain.Store" >
+    update t_store
+    <set >
+      <if test="mqID != null" >
+        mqID = #{mqID,jdbcType=VARCHAR},
+      </if>
+      <if test="abstraction != null" >
+        abstraction = #{abstraction,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="logoPath != null" >
+        logoPath = #{logoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insertTime = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mi360.aladdin.store.domain.Store" >
+    update t_store
+    set mqID = #{mqID,jdbcType=VARCHAR},
+      abstraction = #{abstraction,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      logoPath = #{logoPath,jdbcType=VARCHAR},
+      insertTime = #{insertTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <select id="selectByMqID" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	 select 
+    <include refid="Base_Column_List" />
+    from t_store
+    where mqID = #{mqID,jdbcType=VARCHAR}
+  </select>
+</mapper>
