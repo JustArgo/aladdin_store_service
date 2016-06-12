@@ -2,11 +2,14 @@ package com.mi360.aladdin.store.service.impl;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mi360.aladdin.store.domain.OrderStore;
 import com.mi360.aladdin.store.domain.Store;
 import com.mi360.aladdin.store.domain.StoreProduct;
+import com.mi360.aladdin.store.mapper.OrderStoreMapper;
 import com.mi360.aladdin.store.mapper.StoreMapper;
 import com.mi360.aladdin.store.mapper.StoreProductMapper;
 import com.mi360.aladdin.store.service.IStoreService;
@@ -21,6 +24,9 @@ public class StoreServiceImpl implements IStoreService{
 
 	@Autowired
 	private StoreProductMapper storeProductMapper;
+	
+	@Autowired
+	private OrderStoreMapper orderStoreMapper;
 	
 	@Override
 	public int createStore(String requestId, String mqId, String title,
@@ -177,6 +183,41 @@ public class StoreServiceImpl implements IStoreService{
 		LogUtil.logOutput(serviceName, "recommendProducts", requestId, ret);
 		
 		return ret;
+	}
+
+	@Override
+	public int getOrderCount(String requestId, String mqId, Date startTime,
+			Date endTime) {
+
+		LogUtil.logInput(serviceName, "getOrderCount", requestId, mqId, startTime, endTime);
+		int count = 0;
+		
+		if(mqId!=null){
+			Store store = storeMapper.selectByMqID(mqId);
+			if(store!=null){
+				count = orderStoreMapper.getOrderCount(store.getID(), startTime, endTime);
+			}
+		}
+		
+		LogUtil.logOutput(serviceName, "getOrderCount", requestId, count);
+		
+		return count;
+	}
+
+	@Override
+	public void getOrder(String requestId, String mqId, Date startTime,
+			Date endTime) {
+		
+		LogUtil.logInput(serviceName, "getOrder", requestId, mqId, startTime, endTime);
+		
+		if(mqId!=null){
+			Store store = storeMapper.selectByMqID(mqId);
+			if(store!=null){
+				List<OrderStore> orderStoreList = orderStoreMapper.getOrderStore(store.getID(), startTime, endTime);
+				
+			}
+		}
+		
 	}
 	
 	

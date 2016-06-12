@@ -1,8 +1,9 @@
 package com.mi360.aladdin.store;
 
+import java.text.SimpleDateFormat;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.mi360.aladdin.store.domain.Store;
 import com.mi360.aladdin.store.service.IStoreService;
 
 public class Start {
@@ -17,7 +18,10 @@ public class Start {
 		/*storeService.addProductsIntoStore("", "2", new Integer[]{22,23,24,25});
 		storeService.addProductsIntoStore("", "3", new Integer[]{22,23,24,25,26});
 		*/
-		int ret = storeService.recommendProducts("", "3", new Integer[]{23,24});
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+		
+		int ret = storeService.getOrderCount("", "3", format.parse("20160612112439"), format.parse("20160612112455"));
 		System.out.println("ret:"+ret);
 		
 		while(true){

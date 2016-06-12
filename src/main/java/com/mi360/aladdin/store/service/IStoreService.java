@@ -1,5 +1,7 @@
 package com.mi360.aladdin.store.service;
 
+import java.util.Date;
+
 import com.mi360.aladdin.store.domain.Store;
 
 public interface IStoreService {
@@ -70,4 +72,22 @@ public interface IStoreService {
 	 */
 	int recommendProducts(String requestId, String mqId, Integer[] productIds);
 	
+	/**
+	 * 查询某个用户的店铺 在指定时间段内 下单的数量
+	 * @param requestId
+	 * @param mqId
+	 * @param startTime 起始时间(查询的时候>=起始时间) 可传入空值,代表不限制起始时间
+	 * @param endTime	结束时间(查询的时候<=起始时间) 可传入空值,代表不限制结束时间
+	 * @return
+	 */
+	int getOrderCount(String requestId, String mqId, Date startTime, Date endTime);
+	
+	/**
+	 * 查询店铺中的订单
+	 * @param requestId
+	 * @param mqId
+	 * @param startTime
+	 * @param endTime
+	 */
+	void getOrder(String requestId, String mqId, Date startTime, Date endTime);	
 }
